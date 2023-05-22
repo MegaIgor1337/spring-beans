@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                             http://www.springframework.org/schema/beans/spring-beans.xsd
+                             http://www.springframework.org/schema/context
+                             http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean id="connectionDataBase" name="connectionDataBase" class="org.example.connection.ConnectionDataBase">
+        <constructor-arg name="name" value="${db.username}"/>
+        <constructor-arg name="password" value="${db.password}"/>
+        <constructor-arg name="url" value="${db.url}"/>
+        <constructor-arg name="driver" value="${db.driver}"/>
+        <constructor-arg name="poolSize" value="${db.poolSize}"/>
+    </bean>
+
+    <bean id="userRepository" name="userRepository" class="org.example.repo.UserRepository">
+        <constructor-arg name="connectionDataBase" ref="connectionDataBase"/>
+    </bean>
+
+    <bean id="companyRepository" name="companyRepository" class="org.example.repo.CompanyRepository">
+        <constructor-arg name="connectionDataBase" ref="connectionDataBase"/>
+    </bean>
+
+    <bean id="userService" name="userService" class="org.example.service.UserService">
+        <constructor-arg name="userRepository" ref="userRepository"/>
+    </bean>
+
+    <bean id="companyService" name="companyService" class="org.example.service.CompanyService">
+        <constructor-arg name="companyRepository" ref="companyRepository"/>
+    </bean>
+</beans>
