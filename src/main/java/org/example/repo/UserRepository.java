@@ -13,6 +13,6 @@ public class UserRepository implements Dao<Long, User> {
 
     @Override
     public Optional<User> find(Session session, Long id) {
-            return Optional.ofNullable(session.get(User.class, id));
+        return Optional.ofNullable(session.get(User.class, id));
     }
 }

@@ -14,28 +14,22 @@ public class HibernateUtil {
     public static SessionFactory buildSessionFactory(ConnectionDataBase connectionDataBase) {
         Configuration configuration = new Configuration();
 
-        // Установка настроек подключения
         Properties properties = new Properties();
         properties.setProperty(Environment.URL, connectionDataBase.getUrl());
         properties.setProperty(Environment.USER, connectionDataBase.getName());
         properties.setProperty(Environment.PASS, connectionDataBase.getPassword());
-        // Другие настройки...
-
-        // Установка драйвера
         configuration.setProperty(Environment.DRIVER, connectionDataBase.getDriver());
-
-        // Установка настроек Hibernate
+        properties.setProperty("hibernate.dialect", connectionDataBase.getHibernateDialect());
         configuration.setProperties(properties);
 
-        // Добавление классов-сущностей
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Payment.class);
         configuration.addAnnotatedClass(UserChat.class);
         configuration.addAnnotatedClass(Company.class);
         configuration.addAnnotatedClass(Profile.class);
         configuration.addAnnotatedClass(Chat.class);
-        // Добавьте другие классы-сущности, если они есть...
 
         return configuration.buildSessionFactory();
     }
+
 }

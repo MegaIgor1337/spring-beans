@@ -15,25 +15,25 @@ import java.util.concurrent.BlockingQueue;
 
 @Data
 public class ConnectionDataBase {
-    private  String name;
-    private  String password;
-    private  String url;
-    private  String driver;
-    private  String poolSize;
-    private  BlockingQueue<Connection> pool;
+    private String name;
+    private String password;
+    private String url;
+    private String driver;
+    private String poolSize;
+    private String hibernateDialect;
+    private BlockingQueue<Connection> pool;
 
-    public ConnectionDataBase(String name, String password, String url, String driver, String poolSize) {
+    public ConnectionDataBase(String name, String password, String url, String driver, String poolSize, String hibernateDialect) {
         this.name = name;
         this.password = password;
         this.url = url;
         this.driver = driver;
         this.poolSize = poolSize;
+        this.hibernateDialect = hibernateDialect;
     }
 
 
-
-
-    private  void loadDriver() {
+    private void loadDriver() {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -41,7 +41,7 @@ public class ConnectionDataBase {
         }
     }
 
-    private  void initConnectionPool() {
+    private void initConnectionPool() {
         var size = poolSize == null ? 12 : Integer.parseInt(poolSize);
         pool = new ArrayBlockingQueue<>(size);
         for (int i = 0; i < size; i++) {
@@ -55,7 +55,7 @@ public class ConnectionDataBase {
         }
     }
 
-    public  Connection get() {
+    public Connection get() {
         try {
             loadDriver();
             initConnectionPool();
@@ -66,7 +66,7 @@ public class ConnectionDataBase {
     }
 
 
-    private  Connection open() {
+    private Connection open() {
         try {
             return DriverManager.getConnection(
                     url,
