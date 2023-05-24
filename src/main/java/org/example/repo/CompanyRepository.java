@@ -5,10 +5,12 @@ import org.example.connection.ConnectionDataBase;
 import org.example.entity.Company;
 import org.example.entity.User;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+@Repository
 public class CompanyRepository implements Dao<Integer, Company> {
     private ConnectionDataBase connectionDataBase;
 

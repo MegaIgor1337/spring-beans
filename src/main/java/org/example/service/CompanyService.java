@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import org.example.dto.CompanyReadDto;
 import org.example.repo.CompanyRepository;
 import org.hibernate.Session;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+@Service
 public class CompanyService {
     private CompanyRepository companyRepository;
 

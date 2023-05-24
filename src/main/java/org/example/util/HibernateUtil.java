@@ -1,5 +1,6 @@
 package org.example.util;
 
+import lombok.experimental.UtilityClass;
 import org.example.connection.ConnectionDataBase;
 import org.example.convertor.BirthdayConvertor;
 import org.example.entity.*;
@@ -7,9 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
-
+@UtilityClass
 public class HibernateUtil {
     public static SessionFactory buildSessionFactory(ConnectionDataBase connectionDataBase) {
         Configuration configuration = new Configuration();

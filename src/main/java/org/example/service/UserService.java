@@ -5,10 +5,12 @@ import org.example.dto.CompanyReadDto;
 import org.example.dto.UserReadDto;
 import org.example.repo.UserRepository;
 import org.hibernate.Session;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+@Service
 public class UserService {
     private UserRepository userRepository;
 
